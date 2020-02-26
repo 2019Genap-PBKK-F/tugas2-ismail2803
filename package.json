@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/2019Genap-PBKK-F/tugas2-ismail2803/issues"
   },
-  "homepage": "https://github.com/2019Genap-PBKK-F/tugas2-ismail2803#readme"
+  "homepage": "https://github.com/2019Genap-PBKK-F/tugas2-ismail2803#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "joi": "^14.3.1",
+    "mssql": "^6.1.0"
+  }
 }

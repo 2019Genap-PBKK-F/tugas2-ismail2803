@@ -2,15 +2,17 @@ var express = require('express');
 var app = express();
 const hostname = '10.199.14.46';
 const port = 8030;
- 
-app.get("/product",function(request,response)
+
+var mahasiswaController = require('./Controller/MahasiswaController')();
+
+app.get("/",function(request, response)
 {
-    response.json({"Message":"Welcome to Node js"});
+    response.json({"Message":"Welcome"});
 });
- 
+app.use("/api/mahasiswa", mahasiswaController);
+
 app.listen(port, function () {
-    var datetime = new Date();
-    var message = "Server runnning on Port:- " + port + "Started at :- " + datetime;
+    var message = "Server runnning on Port: " + port;
     console.log(message);
 });
 

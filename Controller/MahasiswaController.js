@@ -66,6 +66,7 @@ var routes = function()
                 var transaction = new sql.Transaction(conn);
                 transaction.begin().then(function () {
                     var request = new sql.Request(transaction);
+                    request.input("Id", sql.Int(), _mahasiswaID)
                     request.input("NRP", sql.VarChar(50), req.body.NRP)
                     request.input("Nama", sql.VarChar(50), req.body.Nama)
                     request.input("Angkatan", sql.Int(), req.body.Angkatan)

@@ -88,6 +88,32 @@ var routes = function()
                     conn.close();
                     res.status(400).send("Error 4");});
         });
+    router.route('/:id')
+        .delete(function (req, res) {
+            var _mahasiswaID = req.params.id;
+            conn.connect().then(function () {
+                var transaction = new sql.Transaction(conn);
+                transaction.begin().then(function () {
+                    var request = new sql.Request(transaction);
+                    request.input("Id", sql.Int, _mahasiswaID)
+                    request.execute("Usp_DeleteProduct").then(function () {
+                        transaction.commit().then(function (recordSet) {
+                            conn.close();
+                            res.status(200).json("MahasiswaID:" + _mahasiswaID);
+                        }).catch(function (err) {
+                            conn.close();
+                            res.status(400).send("Error while Deleting data");
+                        });
+                    }).catch(function (err) {
+                        conn.close();
+                        res.status(400).send("Error while Deleting data");
+                    });
+                }).catch(function (err) {
+                    conn.close();
+                    res.status(400).send("Error while Deleting data");
+                });
+            })
+        });
 
     return router;       
 };

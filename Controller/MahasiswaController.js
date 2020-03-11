@@ -27,6 +27,67 @@ var routes = function()
                     res.status(400).send("Error");
                 });
         });
+    router.route('/')
+        .post(function (req, res) {
+            conn.connect().then(function () {
+                var transaction = new sql.Transaction(conn);
+                transaction.begin().then(function () {
+                    var request = new sql.Request(transaction);
+                    request.input("NRP", sql.VarChar(50), req.body.NRP)
+                    request.input("Nama", sql.VarChar(50), req.body.Nama)
+                    request.input("Angkatan", sql.Int(), req.body.Angkatan)
+                    request.input("Tgl_lahir", sql.Date(), req.body.Tgl_lahir)
+                    request.execute("Usp_InsertMahasiswa").then(function () {
+                        transaction.commit().then(function (recordSet) {
+                            conn.close();
+                            res.status(200).send(req.body);
+                        }).catch(function (err) {
+                            conn.close();
+                            res.status(400).send("Error 1");
+                        });
+                    }).catch(function (err) {
+                        conn.close();
+                        res.status(400).send("Error 2");
+                    });
+                }).catch(function (err) {
+                    conn.close();
+                    res.status(400).send("Error 3");
+                });
+            }).catch(function (err) {
+                conn.close();
+                res.status(400).send("Error 4");
+            });
+        });
+    router.route('/:id')
+        .put(function (req, res)
+         {
+            var _mahasiswaID = req.params.id;
+            conn.connect().then(function () {
+                var transaction = new sql.Transaction(conn);
+                transaction.begin().then(function () {
+                    var request = new sql.Request(transaction);
+                    request.input("NRP", sql.VarChar(50), req.body.NRP)
+                    request.input("Nama", sql.VarChar(50), req.body.Nama)
+                    request.input("Angkatan", sql.Int(), req.body.Angkatan)
+                    request.input("Tgl_lahir", sql.Date(), req.body.Tgl_lahir)
+                    request.execute("Usp_UpdateMahasiswa").then(function () {
+                        transaction.commit().then(function (recordSet) {
+                            conn.close();
+                            res.status(200).send(req.body);
+                        }).catch(function (err) {
+                            conn.close();
+                            res.status(400).send("Error 1");});
+                    }).catch(function (err) {
+                        conn.close();
+                        res.status(400).send("Error 2");});
+                }).catch(function (err) {
+                    conn.close();
+                    res.status(400).send("Error 3");});
+            }).catch(function (err) {
+                    conn.close();
+                    res.status(400).send("Error 4");});
+        });
+
     return router;       
 };
 module.exports = routes;

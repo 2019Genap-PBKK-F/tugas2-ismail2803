@@ -3,6 +3,12 @@ var app = express();
 const hostname = '10.199.14.46';
 const port = 8030;
 
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(bodyParser.json());
+
 var mahasiswaController = require('./Controller/MahasiswaController')();
 
 app.get("/",function(request, response)

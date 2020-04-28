@@ -1,13 +1,8 @@
-var sql = require("mssql");
-var connect = function()
+const connect =
 {
-    var conn = new sql.ConnectionPool({
-        user: 'sa',
-        password: 'SaSa1212',
-        server: '10.199.13.253',
-        database: 'nrp05111740007007'
-    });
-    console.log(conn)
-    return conn;
+    user: 'sa',
+    password: 'SaSa1212',
+    server: '10.199.13.253',
+    database: 'nrp05111740007007'
 };
 module.exports = connect;

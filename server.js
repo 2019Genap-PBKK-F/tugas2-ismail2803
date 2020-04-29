@@ -356,7 +356,7 @@ app.post("/api/masterindikator/", function(req, res){
 app.put("/api/masterindikator/:id", function(req, res){
     var param = [
         { name: 'id', sqltype: sql.Int, value: req.body.id },
-        // { name: 'id_aspek', sqltype: sql.Int, value: req.body.id_aspek },
+        { name: 'id_aspek', sqltype: sql.Int, value: req.body.id_aspek },
         { name: 'id_pembilang', sqltype: sql.Int, value: req.body.id_penyebut },
         { name: 'id_penyebut', sqltype: sql.Int, value: req.body.id_pembilang },
         { name: 'nama', sqltype: sql.VarChar, value: req.body.nama },
@@ -437,9 +437,10 @@ app.post("/api/satuankerja/", function(req, res){
         { name: 'id_induk_satker', sqltype: sql.VarChar, value: req.body.id_induk_satker },
         { name: 'nama', sqltype: sql.VarChar, value: req.body.nama },
         { nama: 'email', sqltype: sql.VarBinary, value: req.body.email },
+        { nama: 'level_unit', sqltype: sql.VarBinary, value: req.body.level_unit },
         { nama: 'expired_date', sqltype: sql.DateTime, value: req.body.expired_date }
     ]
-    var query = "insert into SatuanKerja ( id, id_jns_satker, id_induk_satker, nama, email, create_date, last_update, expired_date) values ( @id, @id_jns_satker, @id_induk_satker, @nama, @email, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, (CURRENT_TIMESTAMP+365) )"
+    var query = "insert into SatuanKerja ( id, id_jns_satker, id_induk_satker, nama, email, create_date, last_update, expired_date) values ( @id, @id_jns_satker, @id_induk_satker, @nama, @email, @level_unit, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, (CURRENT_TIMESTAMP+365) )"
     exec(res, query, param, 1)
 });
 
@@ -450,9 +451,10 @@ app.put("/api/satuankerja/:id", function(req, res){
         { name: 'id_induk_satker', sqltype: sql.VarChar, value: req.body.id_induk_satker },
         { name: 'nama', sqltype: sql.VarChar, value: req.body.nama },
         { nama: 'email', sqltype: sql.VarBinary, value: req.body.email },
+        { nama: 'level_unit', sqltype: sql.VarBinary, value: req.body.level_unit },
         { nama: 'expired_date', sqltype: sql.DateTime, value: req.body.expired_date }
     ]
-    var query = "update SatuanKerja set id_jns_satker = @id_jns_satker, id_induk_satker = @id_induk_satker, nama = @nama, email = @email, last_update = CURRENT_TIMESTAMP where id = @id";
+    var query = "update SatuanKerja set id_jns_satker = @id_jns_satker, id_induk_satker = @id_induk_satker, nama = @nama, email = @email, level_unit = @level_unit, last_update = CURRENT_TIMESTAMP where id = @id";
     exec(res, query, param, 1)
 });
 

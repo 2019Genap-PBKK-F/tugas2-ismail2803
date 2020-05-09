@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 var sql = require('mssql');
 const dbconfig = require("./Connection/connect");
-// const hostname = '10.199.14.46';
+const hostname = '10.199.14.46';
 const port = 8030;
 
 var bodyParser = require('body-parser');
@@ -578,6 +578,32 @@ app.delete("/api/aspek/:id", function(req, res)
     ]
     var query = "delete from Aspek where id = @id";
     exec(res, query, param, 1)
+})
+
+//////////////////////////
+/////Final-Project///////
+////////////////////////
+
+// FP GET
+
+app.get("/api/abmas", function(req, res){
+    var query = "select * from Abmas"
+    exec(res, query, null, 0)
+})
+  
+app.get("/api/dosen", function(req, res){
+    var query = "select * from Dosen"
+    exec(res, query, null, 0)
+    })
+  
+app.get("/api/penelitian", function(req, res){
+    var query = "select * from Penelitian"
+    exec(res, query, null, 0)
+})
+  
+app.get("/api/publikasi", function(req, res){
+    var query = "select * from Publikasi"
+    exec(res, query, null, 0)
 })
 
 // LISTEN

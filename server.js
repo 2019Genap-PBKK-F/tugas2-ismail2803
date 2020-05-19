@@ -425,6 +425,12 @@ app.get("/api/satuankerja/", function(req, res){
     exec(res, query, null, 0);
 });
 
+app.get("/api/satuankerja/list", function(req, res)
+{
+  var query = "select id, nama from SatuanKerja where nama like 'Departemen%' or nama like 'Fakultas%' order by nama"  
+  exec(res, query, null, 0)
+})
+
 app.get("/api/satuankerja/nama", function(req, res){
     var query = "select id, nama as name from SatuanKerja";
     exec(res, query, null, 0);

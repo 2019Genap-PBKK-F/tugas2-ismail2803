@@ -340,7 +340,7 @@ app.get("/api/masterindikator/nama", function(req, res){
 app.post("/api/masterindikator/", function(req, res){
     var param = [
         { name: 'id', sqltype: sql.Int, value: req.body.id },
-        // { name: 'id_aspek', sqltype: sql.Int, value: req.body.id_aspek },
+        { name: 'id_aspek', sqltype: sql.Int, value: req.body.id_aspek },
         { name: 'id_pembilang', sqltype: sql.Int, value: req.body.id_penyebut },
         { name: 'id_penyebut', sqltype: sql.Int, value: req.body.id_pembilang },
         { name: 'nama', sqltype: sql.VarChar, value: req.body.nama },
@@ -349,7 +349,7 @@ app.post("/api/masterindikator/", function(req, res){
         { name: 'expired_date', sqltype: sql.DateTime, value: req.body.expired_date }
    ]
 
-   var query = "insert into MasterIndikator( id_pembilang, id_penyebut, nama, deskripsi, default_bobot, create_date, last_update, expired_date ) values ( @id_pembilang, @id_penyebut, @nama, @deskripsi, @default_bobot, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, (CURRENT_TIMESTAMP+365) )"
+   var query = "insert into MasterIndikator( id_aspek, id_pembilang, id_penyebut, nama, deskripsi, default_bobot, create_date, last_update, expired_date ) values ( @id_aspek, @id_pembilang, @id_penyebut, @nama, @deskripsi, @default_bobot, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, (CURRENT_TIMESTAMP+365) )"
    exec(res, query, param, 1)
 });
 
